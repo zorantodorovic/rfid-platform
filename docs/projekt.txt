@@ -1,4 +1,4 @@
-Projektna zaduenja:
+Projektna zaduÅ¾enja:
 
-1. Filip Popiæ  (Apache Spark)
-2. ...
+1. Filip PopiÄ‡  (Apache Spark)
+2. Domagoj Hrestak (Izrada kostura platforme u Spring MVC frameworku, mogu i pomoÄ‡i sa frontendom)
