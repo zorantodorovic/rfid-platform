@@ -1,0 +1,80 @@
+
+## Main.java
+Osnovna metoda koja podiže iot-platform rest api uslugu
+
+
+## AuthController.java  			/
+Kontroler za registraciju, autentifikaciju i autorizaciju korisnika (iz Logic/Access tablice)
+
+register(user)				'POST' 	/register
+login(user) 				'PUT' 	/login
+authorize(user)				'GET' 	/auth
+logout(user) 				'PUT' 	/logout
+
+
+## UserController.java 				/users
+Kontroler za dohvat, stvaranje, izmjenu i brisanje zapisa o korisnicima (iz Logic/User tablice).
+
+getUsers(size)  			'GET'	/users
+getUser(userId)  			'GET'	/users/{userId}
+addUser(user) 				'POST'  /users
+updateUser(user)			'PUT'	/users
+deleteUser(userId) 			'DEL'   /users/{userId}
+
+
+## SensorController.java			/sensors
+Kontroler za dohvat, stvaranje, izmjenu i brisanje zapisa o senzorima (iz Logic/Sensor tablice).
+
+getSensors(userId)	 		'GET'	/sensors/		
+addSensor(userId, sensor)		'POST'	/sensors/{userId}
+updateSensor(userId, sensor)		'PUT'	/sensors/{userId}
+deleteSink(userId, sensorId)		'DEL'	/sensors/{userId,sensorId}
+
+getSupportedSensors(size)		'GET'	/logic/sensors			ADMIN
+addSupportedSensor(sensor) 		'POST'	/logic/sensors 			ADMIN
+updateSupportedSensor(sensor) 		'PUT'	/logic/sensors			ADMIN
+deleteSupportedSensor(sensorId)		'DEL' 	/logic/sensors/{sensorId}	ADMIN
+
+
+## SinkController.java 				/sinks
+Kontroler za dohvat, stvaranje, izmjenu i brisanje zapisa o spremištima podataka (iz Logic/Sink tablice).
+
+getSinks(userId) 			'GET'   /sinks/{userId}
+addSink(userId, sink)			'POST'	/sinks/{userId}
+updateSink(userId, sink)		'PUT'	/sinks/{userId}
+deleteSink(userId, sinkId)		'DEL'	/sinks/{userId}{sinkId}
+
+getSupportedSinks(size)			'GET'	/logic/sinks			ADMIN
+addSupportedSink(sink) 			'POST'	/logic/sinks 			ADMIN
+updateSupportedSink(sink) 		'PUT'	/logic/sinks			ADMIN
+deleteSupportedSink(sinkId) 		'DEL' 	/logic/sinks/{sinkId}		ADMIN
+
+
+## IoTController.java 			/iot
+"Vanjska komponenta" koja može primati, parsirati i prosljeđivati senzorska očitanja u json formatu. 
+
+readRecord(record)			'not-REST'
+sendRecord(jsonRecord)			'not-REST'
+pingSensor(sensorId)			'POST'	/iot/ping
+
+
+## DataController.java 				/data
+"Vanjska komponenta koja" može čitati i pisati iz različitih izvora podataka (file, hdfs, MySQL, PostgreSQL, ...)
+
+saveToDB(sink,record)			'POST'	/data
+readFromDB(sink,record)			'GET'	/data
+
+
+## QueryController.java 			/queries
+"Vanjska komponenta" koja može postavljati i dohvaćati upite.
+
+addQuery(query)				'POST'	/query/
+addPermanentQuery(query,period)		'POST'	/query/{period}
+readPermanentQueries(userId)		'GET'	/query/{userId}
+
+
+
+
+
+
+
