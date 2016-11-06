@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+header, nav, article, section, footer, aside {
+    display: block;
+}
+
+.logo {
+    float: left;
+    width: 100px;
+    height: 100px;
+    padding-bottom: 10px;
+}
+
+.top_nav {
+    float: left;
+    width: 900px;
+    padding-bottom: 10px;
+}
+
+.top_nav ul li {
+    float: left;
+    padding: 38px 20px;
+    color: blueviolet;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.clear{
+    clear: both;
+}

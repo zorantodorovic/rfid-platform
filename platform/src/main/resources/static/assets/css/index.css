@@ -1,0 +1,26 @@
+h1 {
+    color: blueviolet;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+thead{
+    background-color: #ccddee;
+    border: 1px solid black;
+
+}
+th, td{
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.user_credentials{
+    padding: 10px;
+}
+
+form{
+    display: block;
+    padding: 10px;
+}

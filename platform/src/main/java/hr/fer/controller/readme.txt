@@ -1,0 +1,1 @@
+kontroleri iz ove baze predstavljaju rest-api (platformu) i primaju/vracaju iskljucivo json objekte

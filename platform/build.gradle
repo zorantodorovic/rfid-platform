@@ -1,0 +1,73 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war' //creates automatically webapp folder (not used anymore)
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'platform'
+    version = '0.0.1'
+}
+
+war {
+    baseName = 'platform'
+    version = '0.0.1'
+}
+
+bootRun {
+    addResources = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //rest
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    compile 'org.springframework.boot:spring-boot-starter-hateoas'
+
+    //web
+    compile 'org.springframework.boot:spring-boot-starter-web-services'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+//    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    // security validation
+    compile 'org.springframework.boot:spring-boot-starter-validation'
+    compile 'org.springframework.session:spring-session'
+    compile "org.springframework.boot:spring-boot-starter-security"
+
+    // connectors
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtime 'mysql:mysql-connector-java'
+    runtime 'org.postgresql:postgresql'
+
+    // test
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    // webjars
+    compile 'org.webjars:webjars-locator:0.30'
+    compile 'org.webjars:bootstrap:3.3.7-1'
+    compile 'org.webjars:jquery:3.1.1'
+
+    //To build a war file that is both executable and deployable into an external container,
+    // you need to mark the embedded container dependencies as belonging to the war plugin’s
+//    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+
+    //To build jar
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+
+}
