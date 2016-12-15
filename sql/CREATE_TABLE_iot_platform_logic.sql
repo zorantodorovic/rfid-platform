@@ -1,28 +1,3 @@
-# mysql naredbe u terminalu:
-
-> mysql -u root -p 
-> toor
-> create database iot_platform_records;
-> create database iot_platform_logic;  // zasad se ne koristi
-
-
-
-
-
-# mysql postavke za jdbc:
-
-src/main/resources/application.properties:
-
-jdbc.driverClassName = com.mysql.jdbc.Driver
-jdbc.url = jdbc:mysql://localhost:3306/iot_platform_logic?autoReconnect=true&useSSL=false
-jdbc.username = root
-jdbc.password = toor
-
-
-
-
-# MYSQL skripte za izgradnju baze:
-
 CREATE TABLE Chip
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -92,11 +67,3 @@ CREATE TABLE UserSensorSink
 );
 CREATE INDEX UserSensorSink_Sensor_id_fk ON UserSensorSink (sensorId);
 CREATE INDEX UserSensorSink_Sink_id_fk ON UserSensorSink (sinkId);
-CREATE TABLE Record
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    dateTime DATETIME NOT NULL,
-    sensorId INT(11) NOT NULL,
-    chipId INT(11) NOT NULL
-);
-CREATE UNIQUE INDEX Record_id_uindex ON Record (id);
