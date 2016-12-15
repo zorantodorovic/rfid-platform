@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
+</head>
+
+<body>
+
+<!--/*@thymesVar id="user" type="hr.fer.model.User"*/-->
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+    <label>
+        Username:
+        <input type="text" th:field="*{username}"/>
+        <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</td>
+    </label>
+    <br/>
+
+    <label>
+        Password:
+        <input type="password" th:field="*{password}"/>
+        <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+    </label>
+    <br/>
+
+    <input type="submit" value="Register"/>
+</form>
+
+</body>
+</html>

@@ -1,1 +1,0 @@
-ovo je apstrakcija repozitorija prema bazi podataka od platforme "Logic"

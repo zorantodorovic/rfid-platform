@@ -1,1 +1,0 @@
-ovdje ide sve static (public) stvari: html css js

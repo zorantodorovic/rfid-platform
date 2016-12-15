@@ -6,3 +6,23 @@ te za podatke moraju pitati kontrolere iz platforme
 
 
 oni mogu vracati ModelView/Json ili kako vec frontendas zeli za web
+
+
+
+
+
+root folder za jsp/Thymeleaf je u folderu	/src/main/resources/templates/
+
+@GetMapping
+public String createIndex() {
+    return "register"; //nema ekstenzije
+}
+
+
+
+root folder za html je u folderu			src/main/resources/views/
+
+@GetMapping
+public String createIndex() {
+    return "index.html"; //treba ekstenzija
+}

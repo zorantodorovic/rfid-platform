@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
-public class PlatformApplication extends SpringBootServletInitializer  {
+public class PlatformApplication extends SpringBootServletInitializer {
 
     /**
      * Used when run as JAR
@@ -14,13 +14,4 @@ public class PlatformApplication extends SpringBootServletInitializer  {
     public static void main(String[] args) {
         SpringApplication.run(PlatformApplication.class, args);
     }
-
-    /**
-     * Used when run as WAR
-     */
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(PlatformApplication.class);
-    }
-
 }

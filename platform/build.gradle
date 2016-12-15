@@ -11,15 +11,9 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'war' //creates automatically webapp folder (not used anymore)
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'platform'
-    version = '0.0.1'
-}
-
-war {
     baseName = 'platform'
     version = '0.0.1'
 }
@@ -42,7 +36,6 @@ dependencies {
     //web
     compile 'org.springframework.boot:spring-boot-starter-web-services'
     compile 'org.springframework.boot:spring-boot-starter-web'
-//    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     // security validation
     compile 'org.springframework.boot:spring-boot-starter-validation'
@@ -65,9 +58,12 @@ dependencies {
 
     //To build a war file that is both executable and deployable into an external container,
     // you need to mark the embedded container dependencies as belonging to the war plugin’s
-//    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    //providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 
     //To build jar
     compile 'org.springframework.boot:spring-boot-starter-tomcat'
 
+    //tymeleaf
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile 'org.thymeleaf:thymeleaf-spring4'
 }

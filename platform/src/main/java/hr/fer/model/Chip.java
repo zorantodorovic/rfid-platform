@@ -1,22 +1,20 @@
 package hr.fer.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Sink")
-public class Sink {
+@Table(name = "Chip")
+public class Chip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
-    private String uri;
+    private String name;
 
-    //region JPA things
+    // region JPA things
 
-    public Sink() {
+    public Chip() {
     }
 
     public int getId() {
@@ -27,19 +25,18 @@ public class Sink {
         this.id = id;
     }
 
-    public String getUri() {
-        return uri;
+    public String getName() {
+        return name;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return String.format("Sink{id=%d, uri='%s'}", id, uri);
+        return String.format("Chip{id=%d, name='%s'}", id, name);
     }
 
     //endregion
-
 }

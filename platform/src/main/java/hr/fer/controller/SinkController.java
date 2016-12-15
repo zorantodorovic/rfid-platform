@@ -1,6 +1,7 @@
 package hr.fer.controller;
 
 
+import hr.fer.model.Sink;
 import hr.fer.repository.SinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@RestControllerAdvice
+@RestController
 @RequestMapping("/sinks")
 public class SinkController {
 
@@ -23,7 +24,8 @@ public class SinkController {
     }
 
     @GetMapping
-    public String createIndex() {
-        return "aloha sinks";
+    public Iterable<Sink> readSinks(){
+        return repo.findAll();
     }
+
 }

@@ -1,16 +1,17 @@
 package hr.fer.controller;
 
 
+import hr.fer.model.User;
 import hr.fer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@RestControllerAdvice
+@RestController
 @RequestMapping("/users")
 public class UserController {
 
@@ -22,9 +23,8 @@ public class UserController {
     }
 
     @GetMapping
-    public String createIndex() {
-        return "aloha users";
+    public Iterable<User> readUsers() {
+        return repo.findAll();
     }
-
 
 }

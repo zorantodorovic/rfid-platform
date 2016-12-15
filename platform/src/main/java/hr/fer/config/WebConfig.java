@@ -3,16 +3,17 @@ package hr.fer.config;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.core.Ordered;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.webjars.RequireJS;
 
-
+@EnableWebMvc
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
@@ -42,16 +43,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             registry.addResourceHandler("/**")
                     .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
         }
+
     }
 
     @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/views/"); //Now Spring will search for index.html in src/main/resources/views/
-        viewResolver.setSuffix(""); // now both are supported .html .jsp
+    public ServletContextTemplateResolver templateResolver() {
+        ServletContextTemplateResolver viewResolver = new ServletContextTemplateResolver();
+        viewResolver.setPrefix("/"); //Now Spring will search for *.html in src/main/resources/templates/
+        viewResolver.setSuffix(".html");
+        viewResolver.setTemplateMode("HTML5");
+        viewResolver.setOrder(1);
         return viewResolver;
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/webjarsjs", produces = "application/javascript")
@@ -59,7 +62,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return RequireJS.getSetupJavaScript("/webjars/");
     }
 
-
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
 
 }
 

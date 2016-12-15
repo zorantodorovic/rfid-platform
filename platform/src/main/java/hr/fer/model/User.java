@@ -1,56 +1,72 @@
 package hr.fer.model;
 
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @Entity
+@Table(name = "User")
 public class User {
 
-
-    private int id;
-    private byte[] password;
-
     @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull
+    @Size(min = 3, max = 20)
+    private String username;
+
+    @NotNull
+    @Size(min = 3, max = 20)
+    @JsonIgnore
+    private String password;
+
+    //region JPA nedded things.
+
+    public User() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "password")
-    public byte[] getPassword() {
-        return password;
-    }
-
-    public void setPassword(byte[] password) {
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != user.id) return false;
-        if (!Arrays.equals(password, user.password)) return false;
-
-        return true;
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    //endregion
+
     @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + Arrays.hashCode(password);
-        return result;
+    public String toString() {
+        return String.format(
+                "User{id=%d, username='%s', password='%s'}",
+                id, username, password
+        );
     }
 }

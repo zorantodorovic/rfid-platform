@@ -1,38 +1,69 @@
 package hr.fer.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "Sensor")
 public class Sensor {
 
-    private int id;
-
     @Id
-    @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotNull
+    private Integer userId;
+
+    @NotNull
+    private String ipAddress;
+
+    @NotNull
+    private String sensorType;
+
+    //region JPA things
+
+    public Sensor() {
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public Integer getUserId() {
+        return userId;
+    }
 
-        Sensor sensor = (Sensor) o;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-        if (id != sensor.id) return false;
+    public String getIpAddress() {
+        return ipAddress;
+    }
 
-        return true;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public String getSensorType() {
+        return sensorType;
+    }
+
+    public void setSensorType(String sensorType) {
+        this.sensorType = sensorType;
     }
 
     @Override
-    public int hashCode() {
-        return id;
+    public String toString() {
+        return String.format(
+                "Sensor{id=%d, userId=%d, ipAddress='%s', sensorType='%s'}",
+                id, userId, ipAddress, sensorType
+        );
     }
+
+    //endregion
 }
