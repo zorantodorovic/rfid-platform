@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecordRepository extends CrudRepository<Record, Integer> {
+
+    Iterable<Record> findBySensorId(Integer sensorId);
 }

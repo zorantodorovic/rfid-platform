@@ -2,12 +2,10 @@ package hr.fer.controller;
 
 import hr.fer.model.Record;
 import hr.fer.service.IoTService;
+import hr.fer.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -19,15 +17,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class IoTController {
 
     private final IoTService ioTService;
+    private final StorageService storageService;
 
     @Autowired
-    public IoTController(IoTService ioTService) {
+    public IoTController(IoTService ioTService, StorageService storageService) {
         this.ioTService = ioTService;
+        this.storageService = storageService;
     }
 
     @PostMapping("/record")
-    public Record submitNewRecord() {
-        return null;
+    public Iterable<Record> submitNewRecord(@RequestBody Record record) {
+        return storageService.saveRecord(record);
     }
 
     @PostMapping("/ping")

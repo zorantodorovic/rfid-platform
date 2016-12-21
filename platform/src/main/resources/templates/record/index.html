@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>I am text in browser tab</title>
+
+    <!-- ne treba href="../static/assets/css/index.css" zbog addResourceHandlers  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
+
+    <!-- ne treba verzija jer webjars automatski stavi-->
+    <script type="text/javascript" src='/webjars/jquery/jquery.min.js'></script>
+
+    <script src="/webjarsjs"></script>
+    <script data-main="/js/app" src="/webjars/requirejs/require.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <header>
+        <img src="/assets/image/starbucks_logo.png" alt="logo area" class="logo"/>
+        <nav class="top_nav">
+            <ul>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/blaa">Blaa</a></li>
+                <li><a href="/users">Users</a></li>
+                <li><a href="/sensors">Sensors</a></li>
+                <li><a href="/chips">Chips</a></li>
+                <li><a href="/sinks">Sinks</a></li>
+                <li><a href="/queries">Queries</a></li>
+                <li><a href="/records">Records</a></li>
+            </ul>
+        </nav>
+        <div class="clear"></div>
+    </header>
+</div>
+
+<!--<div>-->
+    <!--<table>-->
+        <!--<tr th:each="item, userSensorsBag : ${sensorIds}">-->
+            <!--<td><input type="checkbox"-->
+                       <!--th:name="|sensorIds[${userSensorsBag.index}]|"-->
+                       <!--th:value="${item.getClientID()}"-->
+                       <!--th:checked="${item.selected}"/>-->
+            <!--</td>-->
+            <!--<td th:text="${currentClient.getClientID()}"></td>-->
+            <!--<td th:text="${currentClient.getIpAddress()}"></td>-->
+            <!--<td th:text="${currentClient.getDescription()}"></td>-->
+        <!--</tr>-->
+    <!--</table>-->
+<!--</div>-->
+
+</body>
+</html>

@@ -38,13 +38,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 // ako ukljucim httpbasic onda ce uvijek iskakati popup cak i na /register
                 // za mvc ne treba, ali za rest sami treba
-//                .httpBasic()
-//                .and()
+                .httpBasic()
+                .and()
 
                 .formLogin()
                 .loginPage("/login")
                 .successForwardUrl("/") // '/login' makes POST to this url
                 .permitAll()
+
 
                 .and()
                 .logout()
@@ -53,7 +54,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
 
-                .permitAll();
+                .permitAll()
+
+                .and().csrf().disable()
+        ;
+
 
     }
 

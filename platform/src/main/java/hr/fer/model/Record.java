@@ -12,13 +12,10 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     private Date dateTime;
 
-    @NotNull
     private Integer sensorId;
 
-    @NotNull
     private Integer chipId;
 
     //region JPA things
