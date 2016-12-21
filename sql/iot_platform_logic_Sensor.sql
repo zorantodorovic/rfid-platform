@@ -1,1 +1,0 @@
-INSERT INTO iot_platform_logic.Sensor (sensorType, ipAddress, userId) VALUES (1, '192.168.1.74', 1);

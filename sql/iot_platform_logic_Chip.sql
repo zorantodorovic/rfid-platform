@@ -1,1 +1,0 @@
-INSERT INTO iot_platform_logic.Chip (name) VALUES ('AdminsChipAtFER');
