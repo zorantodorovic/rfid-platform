@@ -4,28 +4,39 @@ package hr.fer.controller;
 import hr.fer.model.Sink;
 import hr.fer.repository.SinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sinks")
 public class SinkController {
 
-    final SinkRepository repo;
+    final SinkRepository sinkRepository;
 
     @Autowired
-    public SinkController(SinkRepository repo) {
-        this.repo = repo;
+    public SinkController(SinkRepository sinkRepository) {
+        this.sinkRepository = sinkRepository;
     }
 
     @GetMapping
-    public Iterable<Sink> readSinks(){
-        return repo.findAll();
+    public Iterable<Sink> readSinks() {
+        return sinkRepository.findAll();
+    }
+
+    @PostMapping
+    public Sink createSink(@RequestBody Sink sink) {
+        return sinkRepository.save(sink);
+    }
+
+    @PutMapping
+    public Sink updateSink(@RequestBody Sink newSink) {
+        if (newSink.getId() == null) {
+            return null;
+        }
+        Sink sink = sinkRepository.findOne(newSink.getId());
+        if (newSink.getUri() != null) {
+            sink.setUri(newSink.getUri());
+        }
+        return sinkRepository.save(sink);
     }
 
 }

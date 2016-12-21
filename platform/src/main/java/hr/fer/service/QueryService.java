@@ -22,6 +22,10 @@ public class QueryService {
         this.recordRepository = recordRepository;
     }
 
+    public Iterable<Query> readQueries() {
+        return queryRepository.findAll();
+    }
+
     public Iterable<Record> submitQuery(Query query) {
         if (query.getSensorId() != null && query.getEndDateTime() != null && query.getStartDateTime() != null) {
             return recordRepository.findBySensorIdAndDateTime(
@@ -33,7 +37,5 @@ public class QueryService {
         return new ArrayList<>();
     }
 
-    public Iterable<Query> getQueries() {
-        return queryRepository.findAll();
-    }
+    public void deleteQuery(Integer queryId){queryRepository.delete(queryId);}
 }

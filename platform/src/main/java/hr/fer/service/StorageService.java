@@ -63,6 +63,15 @@ public class StorageService {
         return result;
     }
 
+    public void deleteRecords(Integer id) {
+        recordRepository.delete(id);
+    }
 
-
+    public Set<Record> getAllRecords() {
+        Set<Record> result = new HashSet<>();
+        for (Record record : recordRepository.findAll()) {
+            result.add(record);
+        }
+        return result;
+    }
 }

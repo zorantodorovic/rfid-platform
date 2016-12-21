@@ -1,5 +1,6 @@
 package hr.fer.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import hr.fer.model.Record;
 import hr.fer.service.IoTService;
 import hr.fer.service.StorageService;
@@ -31,8 +32,15 @@ public class IoTController {
     }
 
     @PostMapping("/ping")
-    public String pingSensor() {
-        return null;
+    public Boolean pingSensor() {
+        //TODO BORIS
+        return ioTService.pingSensor();
+    }
+
+    @PostMapping("/changeIp")
+    public Boolean changeIpAdress(){
+        // TODO BORIS
+        return ioTService.changeSensorIpAdress();
     }
 
 }

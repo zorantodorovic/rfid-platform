@@ -3,10 +3,9 @@ package hr.fer.controller;
 
 import hr.fer.model.Query;
 import hr.fer.model.Record;
-import hr.fer.repository.QueryRepository;
 import hr.fer.service.QueryService;
-import hr.fer.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,11 +27,17 @@ public class QueryController {
 
     @GetMapping
     public Iterable<Query> readQueries() {
-        return queryService.getQueries();
+        return queryService.readQueries();
     }
 
     @PostMapping
     public Iterable<Record> getFilteredRecords(@RequestBody Query query) {
         return queryService.submitQuery(query);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteQuery(@PathVariable Integer id){
+       queryService.deleteQuery(id);
     }
 }

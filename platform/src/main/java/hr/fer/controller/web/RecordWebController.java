@@ -30,10 +30,10 @@ import java.util.stream.Collectors;
 //    }
 //
 //    @PostMapping
-//    public Iterable<Record> getRecords(ModelMap modelMap) {
+//    public Iterable<Record> readRecords(ModelMap modelMap) {
 //        UserSensorsBag userSensorsBag = (UserSensorsBag) modelMap.getOrDefault("userSensorsBag", null);
 //        if (userSensorsBag != null) {
-//            return storageService.getRecords(userSensorsBag.getUserId(),
+//            return storageService.readRecords(userSensorsBag.getUserId(),
 //                    userSensorsBag.getSensorIds().stream().filter(Objects::nonNull).collect(Collectors.toList()));
 //        }
 //        return new ArrayList<>();

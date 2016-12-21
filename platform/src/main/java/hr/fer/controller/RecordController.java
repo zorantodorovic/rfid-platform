@@ -3,10 +3,8 @@ package hr.fer.controller;
 import hr.fer.model.Record;
 import hr.fer.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ public class RecordController {
     }
 
     @PostMapping
-    public Iterable<Record> getRecords(@RequestBody Map<String, Object> body) {
+    public Iterable<Record> readRecords(@RequestBody Map<String, Object> body) {
         Integer userId = (Integer) body.getOrDefault("userId", null);
         Iterable sensorIds = (Iterable) body.getOrDefault("sensorIds", null);
         if (userId != null && sensorIds != null) {
@@ -37,5 +35,15 @@ public class RecordController {
         return null;
     }
 
+    @GetMapping
+    public Iterable<Record> readAllRecords() {
+        return storageService.getAllRecords();
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteRecord(@PathVariable Integer id) {
+        storageService.deleteRecords(id);
+    }
 
 }

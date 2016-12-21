@@ -18,6 +18,11 @@ public class SensorSink  {
     public SensorSink() {
     }
 
+    public SensorSink(Integer sensorId, Integer sinkId) {
+        this.sensorId = sensorId;
+        this.sinkId = sinkId;
+    }
+
     public Integer getSensorId() {
         return sensorId;
     }
