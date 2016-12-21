@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -14,14 +13,13 @@ public class Query {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    private Integer userId;
+    private Integer sensorId;
 
     // Filter attributes (Optional)
 
-    private Integer sensorId;
-    private Date fromDateTime;
-    private Date toDateTime;
+    private Date startDateTime;
+    private Date endDateTime;
+
     private Integer count;
 
     //region JPA things
@@ -37,14 +35,6 @@ public class Query {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public Integer getSensorId() {
         return sensorId;
     }
@@ -53,20 +43,20 @@ public class Query {
         this.sensorId = sensorId;
     }
 
-    public Date getFromDateTime() {
-        return fromDateTime;
+    public Date getStartDateTime() {
+        return startDateTime;
     }
 
-    public void setFromDateTime(Date fromDateTime) {
-        this.fromDateTime = fromDateTime;
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
     }
 
-    public Date getToDateTime() {
-        return toDateTime;
+    public Date getEndDateTime() {
+        return endDateTime;
     }
 
-    public void setToDateTime(Date toDateTime) {
-        this.toDateTime = toDateTime;
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
     }
 
     public Integer getCount() {
@@ -77,13 +67,13 @@ public class Query {
         this.count = count;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Query{id=%d, userId=%d, sensorId=%d, fromDateTime=%d, toDateTime=%d, count=%d}",
-                id, userId, sensorId, fromDateTime, toDateTime, count
-        );
-    }
+
 
     //endregion
+
+
+    @Override
+    public String toString() {
+        return String.format("Query{id=%d, sensorId=%d, startDateTime=%s, endDateTime=%s, count=%d}", id, sensorId, startDateTime, endDateTime, count);
+    }
 }

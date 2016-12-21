@@ -27,7 +27,7 @@ public class RecordController {
     public Iterable<Record> getRecords(@RequestBody Map<String, Object> body) {
         Integer userId = (Integer) body.getOrDefault("userId", null);
         Iterable sensorIds = (Iterable) body.getOrDefault("sensorIds", null);
-        if (userId == null && sensorIds != null) {
+        if (userId != null && sensorIds != null) {
             List<Integer> integers = new ArrayList<>();
             for (Object sensorId : sensorIds) {
                 integers.add(Integer.parseInt(String.valueOf(sensorId)));

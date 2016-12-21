@@ -2,11 +2,12 @@ package hr.fer.controller;
 
 
 import hr.fer.model.Query;
+import hr.fer.model.Record;
 import hr.fer.repository.QueryRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import hr.fer.service.QueryService;
+import hr.fer.service.StorageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -18,10 +19,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequestMapping("/queries")
 public class QueryController {
 
-    QueryRepository repo;
+    private final QueryService queryService;
+
+    @Autowired
+    public QueryController(QueryService queryService) {
+        this.queryService = queryService;
+    }
 
     @GetMapping
     public Iterable<Query> readQueries() {
-        return repo.findAll();
+        return queryService.getQueries();
+    }
+
+    @PostMapping
+    public Iterable<Record> getFilteredRecords(@RequestBody Query query) {
+        return queryService.submitQuery(query);
     }
 }

@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SensorRepository extends CrudRepository<Sensor, Integer> {
+
+    Iterable<Sensor> findByUserId(Integer userId);
+
 }
