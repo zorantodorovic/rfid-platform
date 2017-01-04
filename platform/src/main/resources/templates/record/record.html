@@ -1,22 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>I am text in browser tab</title>
 
-    <!-- ne treba href="../static/assets/css/index.css" zbog addResourceHandlers  -->
+    &lt;!&ndash; ne treba href="../static/assets/css/index.css" zbog addResourceHandlers  &ndash;&gt;
     <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
     <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
 
-    <!-- ne treba verzija jer webjars automatski stavi-->
+    &lt;!&ndash; ne treba verzija jer webjars automatski stavi&ndash;&gt;
     <script type="text/javascript" src='/webjars/jquery/jquery.min.js'></script>
 
     <script src="/webjarsjs"></script>
     <script data-main="/js/app" src="/webjars/requirejs/require.min.js"></script>
-</head>
+</head>-->
 
 <body>
 
-<div class="container">
+<!--<div class="container">
     <header>
         <img src="/assets/image/starbucks_logo.png" alt="logo area" class="logo"/>
         <nav class="top_nav">
@@ -33,22 +33,29 @@
         </nav>
         <div class="clear"></div>
     </header>
-</div>
+</div>-->
+<h1>ur a faget!</h1>
+<!--<div>
+    <table>
+        <tr th:each="record : ${records}">
+            &lt;!&ndash;<td><input type="checkbox"
+                       th:name="|sensorIds[${userSensorsBag.index}]|"
+                       th:value="${item.getClientID()}"
+                       th:checked="${item.selected}"/>
+            </td>&ndash;&gt;
+            <td th:text="${records.getId()}"></td>
+            <td th:text="${records.getDateTime()}"></td>
+            <td th:text="${records.getSensorId()}"></td>
+            <td th:text="${records.getChipId()}"></td>
+        </tr>
+    </table>
+</div>-->
 
-<!--<div>-->
-    <!--<table>-->
-        <!--<tr th:each="item, userSensorsBag : ${sensorIds}">-->
-            <!--<td><input type="checkbox"-->
-                       <!--th:name="|sensorIds[${userSensorsBag.index}]|"-->
-                       <!--th:value="${item.getClientID()}"-->
-                       <!--th:checked="${item.selected}"/>-->
-            <!--</td>-->
-            <!--<td th:text="${currentClient.getClientID()}"></td>-->
-            <!--<td th:text="${currentClient.getIpAddress()}"></td>-->
-            <!--<td th:text="${currentClient.getDescription()}"></td>-->
-        <!--</tr>-->
-    <!--</table>-->
-<!--</div>-->
+<!--<tbody>
+<tr th:each="record: ${records}">
+    <td th:text="${record.getId()}" />
+</tr>
+</tbody>-->
 
 </body>
 </html>
