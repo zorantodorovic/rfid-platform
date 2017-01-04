@@ -34,24 +34,23 @@
         <div class="clear"></div>
     </header>
 </div>
-<h3>List of current user's records</h3>
+<h3>List of current user's queries</h3>
 <div>
     <table>
         <thead>
-            <tr>
-                <th>Record ID</th>
-                <th>DateTime</th>
-                <th>Sensor ID</th>
-                <th>Chip ID</th>
-            </tr>
+        <tr>
+            <th>Query sensor ID</th>
+            <th>Start DateTime</th>
+            <th>End DateTime</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="record : ${records}">
-                <td th:text="${record.sensorId}"></td>
-                <td th:text="${record.id}"></td>
-                <td th:text="${record.dateTime}"></td>
-                <td th:text="${record.chipId}"></td>
-            </tr>
+        <tr th:each="query : ${queries}">
+            <td th:text="${query.sensorId}"></td>
+            <td th:text="${query.id}"></td>
+            <td th:text="${query.startDateTime}"></td>
+            <td th:text="${query.endDateTime}"></td>
+        </tr>
         </tbody>
     </table>
 </div>

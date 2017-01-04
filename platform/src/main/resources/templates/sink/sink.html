@@ -34,24 +34,22 @@
         <div class="clear"></div>
     </header>
 </div>
-<h3>List of current user's records</h3>
+<h3>List of sinks</h3>
 <div>
     <table>
         <thead>
-            <tr>
-                <th>Record ID</th>
-                <th>DateTime</th>
-                <th>Sensor ID</th>
-                <th>Chip ID</th>
-            </tr>
+        <tr>
+            <th>Sink ID</th>
+            <th>Sink URI</th>
+
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="record : ${records}">
-                <td th:text="${record.sensorId}"></td>
-                <td th:text="${record.id}"></td>
-                <td th:text="${record.dateTime}"></td>
-                <td th:text="${record.chipId}"></td>
-            </tr>
+        <tr th:each="sink : ${sinks}">
+            <td th:text="${sink.id}"></td>
+            <td th:text="${sink.uri}"></td>
+
+        </tr>
         </tbody>
     </table>
 </div>
