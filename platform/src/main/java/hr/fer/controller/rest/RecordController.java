@@ -29,7 +29,7 @@ public class RecordController {
     }
 
     @PostMapping
-    public Iterable<Record> readRecords(@Current CurrentUser user, @RequestBody Map<String, Object> sensorsMap) {
+    public Iterable<Record> createRecord(@Current CurrentUser user, @RequestBody Map<String, Object> sensorsMap) {
         Iterable sensorIds = (Iterable) sensorsMap.getOrDefault("sensorIds", null);
         if (sensorIds != null) {
             List<Integer> sensorIdIntegers = new ArrayList<>();

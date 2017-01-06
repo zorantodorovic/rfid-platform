@@ -32,8 +32,8 @@ public class SinkController {
         return sinkRepository.save(sink);
     }
 
-    @PutMapping
-    public Sink updateSink(@RequestBody Sink newSink) {
+    @PutMapping("{id}")
+    public Sink updateSink(@PathVariable Integer id, @RequestBody Sink newSink) {
         if (newSink.getId() == null) {
             return null;
         }
