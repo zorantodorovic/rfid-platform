@@ -17,9 +17,11 @@ public class Query {
     @NotNull
     private Integer sensorId;
 
+    // Filter attributes (Optional)
+
     private Date startDateTime;
     private Date endDateTime;
-    // optional
+
     private Integer count;
 
     //region JPA things
