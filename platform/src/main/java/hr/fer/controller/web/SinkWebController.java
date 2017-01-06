@@ -13,7 +13,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @Controller
-@RequestMapping("/sinks/index")
+@RequestMapping("/sinks")
 public class SinkWebController {
 
     private final SinkRepository sinkRepository;
@@ -25,10 +25,8 @@ public class SinkWebController {
 
     @RequestMapping(method = {GET, POST})
     public String getSinks(Model model) {
-
         model.addAttribute("sinks", sinkRepository.findAll());
-        return "sink/sink";
+        return "views/sink";
     }
-
 
 }

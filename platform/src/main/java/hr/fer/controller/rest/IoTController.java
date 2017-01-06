@@ -1,11 +1,9 @@
-package hr.fer.controller;
+package hr.fer.controller.rest;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import hr.fer.model.Record;
 import hr.fer.service.IoTService;
-import hr.fer.service.StorageService;
+import hr.fer.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -14,21 +12,21 @@ import org.springframework.web.bind.annotation.*;
  * npr. ako korisnik zeli pingati senzor da vidi jel ziv preko njega to radi
  */
 @RestController
-@RequestMapping("/iot")
+@RequestMapping("/rest/iot")
 public class IoTController {
 
     private final IoTService ioTService;
-    private final StorageService storageService;
+    private final RecordService recordService;
 
     @Autowired
-    public IoTController(IoTService ioTService, StorageService storageService) {
+    public IoTController(IoTService ioTService, RecordService recordService) {
         this.ioTService = ioTService;
-        this.storageService = storageService;
+        this.recordService = recordService;
     }
 
     @PostMapping("/record")
     public Iterable<Record> submitNewRecord(@RequestBody Record record) {
-        return storageService.saveRecord(record);
+        return recordService.saveRecord(record);
     }
 
     @PostMapping("/ping")

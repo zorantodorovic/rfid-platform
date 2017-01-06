@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>I am text in browser tab</title>
+
+    <!-- ne treba href="../static/assets/css/index.css" zbog addResourceHandlers  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
+
+    <!-- ne treba verzija jer webjars automatski stavi-->
+    <script type="text/javascript" src='/webjars/jquery/jquery.min.js'></script>
+
+    <script src="/webjarsjs"></script>
+    <script data-main="/js/app" src="/webjars/requirejs/require.min.js"></script>
+</head>
+
+<body>
+
+<div th:include="/shared/menu :: menu"></div>
+
+<h3>List of current user's records</h3>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Sensor ID</th>
+            <th>Date Time</th>
+            <th>Chip ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="records" type="List<hr.fer.model.Record>"*/-->
+        <!--/*@thymesVar id="record" type="hr.fer.model.Record"*/-->
+        <tr th:each="record : ${records}">
+            <td th:text="${record.sensorId}"></td>
+            <td th:text="${record.dateTime}"></td>
+            <td th:text="${record.chipId}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

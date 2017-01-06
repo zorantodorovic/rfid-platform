@@ -4,6 +4,7 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -43,13 +44,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             registry.addResourceHandler("/**")
                     .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
         }
-
     }
 
     @Bean
     public ServletContextTemplateResolver templateResolver() {
         ServletContextTemplateResolver viewResolver = new ServletContextTemplateResolver();
-        viewResolver.setPrefix("/"); //Now Spring will search for *.html in src/main/resources/templates/
+        viewResolver.setPrefix("/templates/"); //Now Spring will search for *.html in src/main/resources/templates/
         viewResolver.setSuffix(".html");
         viewResolver.setTemplateMode("HTML5");
         viewResolver.setOrder(1);
@@ -62,9 +62,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return RequireJS.getSetupJavaScript("/webjars/");
     }
 
+    // to avoid creating login web controller
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/login")
+                .setViewName("/views/login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 

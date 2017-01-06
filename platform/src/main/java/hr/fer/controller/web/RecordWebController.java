@@ -1,51 +1,49 @@
 package hr.fer.controller.web;
 
+import hr.fer.model.Sensor;
 import hr.fer.repository.SensorRepository;
 import hr.fer.repository.UserRepository;
+import hr.fer.security.Current;
+import hr.fer.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import hr.fer.service.StorageService;
+import hr.fer.service.RecordService;
 import org.springframework.ui.Model;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
-import java.util.stream.*;
 
+import static java.util.stream.Collectors.*;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @Controller
-@RequestMapping("/records/index")
+@RequestMapping("/records")
 public class RecordWebController {
 
-    private final StorageService storageService;
-    private final UserRepository userRepository;
+    private final RecordService recordService;
     private final SensorRepository sensorRepository;
-    private int userId;
 
     @Autowired
-    public RecordWebController(StorageService storageService, UserRepository userRepository, SensorRepository sensorRepository) {
-        this.storageService = storageService;
-        this.userRepository = userRepository;
+    public RecordWebController(RecordService recordService,
+                               SensorRepository sensorRepository) {
+        this.recordService = recordService;
         this.sensorRepository = sensorRepository;
 
     }
 
     @RequestMapping(method = {GET, POST})
-    public String getRecords(Model model) {
+    public String getRecords(Model model, @Current CurrentUser user) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        int userId = userRepository.findByUsername(auth.getName()).getId();
-        List<Integer> sensorIds = StreamSupport.stream(sensorRepository.findByUserId(userId).spliterator(), false)
-                .map(map -> map.getId())
-                .collect(Collectors.toList());
+        List<Integer> sensorIds = sensorRepository.findByUserId(user.getId())
+                .stream().map(Sensor::getId).collect(toList());
 
-        model.addAttribute("records", storageService.getRecords(userId, sensorIds));
-        return "record/record";
+        model.addAttribute("records", recordService.readRecords(sensorIds));
+
+        return "views/record";
     }
 
 

@@ -16,24 +16,8 @@
 
 <body>
 
-<div class="container">
-    <header>
-        <nav class="top_nav">
-            <ul>
-                <li><a href="/"><img src="/assets/image/logo.png" width="64" height="64" alt="Home" /></a></li>
-                <li><a href="/blaa">Blaa</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/sensors">Sensors</a></li>
-                <li><a href="/chips/index">Chips</a></li>
-                <li><a href="/sinks/index">Sinks</a></li>
-                <li><a href="/queries/index">Queries</a></li>
-                <li><a href="/records/index">Records</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-        <div class="clear"></div>
-    </header>
-</div>
+<div th:include="/shared/menu :: menu"></div>
+
 <h3>List of sinks</h3>
 <div>
     <table>
@@ -41,14 +25,14 @@
         <tr>
             <th>Sink ID</th>
             <th>Sink URI</th>
-
         </tr>
         </thead>
         <tbody>
+        <!--/*@thymesVar id="sinks" type="Iterable<hr.fer.model.Sink>"*/-->
+        <!--/*@thymesVar id="sink" type="hr.fer.model.Sink"*/-->
         <tr th:each="sink : ${sinks}">
             <td th:text="${sink.id}"></td>
             <td th:text="${sink.uri}"></td>
-
         </tr>
         </tbody>
     </table>

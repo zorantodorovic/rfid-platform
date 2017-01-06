@@ -4,11 +4,11 @@ import hr.fer.model.Query;
 import hr.fer.model.Record;
 import hr.fer.repository.QueryRepository;
 import hr.fer.repository.RecordRepository;
-import hr.fer.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class QueryService {
@@ -17,17 +17,19 @@ public class QueryService {
     private final RecordRepository recordRepository;
 
     @Autowired
-    public QueryService(QueryRepository queryRepository, RecordRepository recordRepository, SensorRepository sensorRepository) {
+    public QueryService(QueryRepository queryRepository,
+                        RecordRepository recordRepository) {
         this.queryRepository = queryRepository;
         this.recordRepository = recordRepository;
     }
 
-    public Iterable<Query> readQueries() {
-        return queryRepository.findAll();
+    public List<Query> readQueries(List<Integer> sensorIds) {
+        return queryRepository.findBySensorIdIn(sensorIds);
     }
 
-    public Iterable<Record> submitQuery(Query query) {
+    public List<Record> submitQuery(Query query) {
         if (query.getSensorId() != null && query.getEndDateTime() != null && query.getStartDateTime() != null) {
+            queryRepository.save(query);
             return recordRepository.findBySensorIdAndDateTime(
                     query.getSensorId(),
                     query.getStartDateTime(),
@@ -37,5 +39,7 @@ public class QueryService {
         return new ArrayList<>();
     }
 
-    public void deleteQuery(Integer queryId){queryRepository.delete(queryId);}
+    public void deleteQuery(Integer queryId) {
+        queryRepository.delete(queryId);
+    }
 }
