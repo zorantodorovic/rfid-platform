@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 
 var windowWidth = Dimensions.get('window').width;
+var serverIpAddress = "192.168.0.19";
 
 import {
     StyleSheet,
@@ -46,20 +47,32 @@ class Login extends Component {
         );
     }
 
+    toBase64() {
+        var string = "admin:admin";
+        var bs64 = btoa(string);
+        return bs64;
+    }
+
     login() {
+        var basicToken = this.toBase64();
+        console.log(basicToken);
         this.setState({ loading: true });
         setTimeout(() => {
-            this.setState({ loading: false });
             this.props.navigator.push({
                 name: 'home',
                 passProps: {
+                    ipAddress: serverIpAddress,
+                    basicToken: basicToken
                 }
             });
+        }, 1000);
+
+        setTimeout(() => {
+            this.setState({ loading: false });
         }, 3000);
     }
 
   	render() {
-        console.log(this.state.loading)
         if (this.state.loading) {
             return this.renderLoadingView();
         }
