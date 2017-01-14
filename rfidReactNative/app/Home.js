@@ -30,18 +30,151 @@ class Home extends Component {
         );
     }
 
+    componentDidMount() {
+    }
+
+    getAllUsers() {
+        var arr = [];
+        this.setState({ loading: true });
+        fetch(`http://${this.props.ipAddress}:8080/rest/users`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${this.props.basicToken}`,
+          }
+          // body: JSON.stringify({
+          // })
+        })
+        // .then((response) => {
+        //     console.log(response);
+        //     // response.text();
+        //     response.json();
+        // })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            responseJson.forEach( function(element, index) {
+                arr.push(element.username);
+            });
+            this.setState({ loading: false });
+            this.props.navigator.push({
+                name: 'listings',
+                passProps: {
+                    title: 'Users',
+                    data: arr
+                }
+            });
+        })
+        .catch((error) => {
+            console.warn(error);
+        });
+    }
+
+    getAllSinks() {
+        var arr = [];
+        this.setState({ loading: true });
+        fetch(`http://${this.props.ipAddress}:8080/rest/sinks?userId=1`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${this.props.basicToken}`,
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            responseJson.forEach( function(element, index) {
+                arr.push(element.uri);
+            });
+            this.setState({ loading: false });
+            console.log(responseJson);
+            this.props.navigator.push({
+                name: 'listings',
+                passProps: {
+                    title: 'Sinks',
+                    data: arr
+                }
+            });
+        })
+        .catch((error) => {
+            console.warn(error);
+        });
+    }
+
+    getAllSensors() {
+        var arr = [];
+        this.setState({ loading: true });
+        fetch(`http://${this.props.ipAddress}:8080/rest/sensors`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${this.props.basicToken}`,
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            responseJson.forEach( function(element, index) {
+                arr.push(element.ipAddress);
+            });
+            this.setState({ loading: false });
+            console.log(responseJson);
+            this.props.navigator.push({
+                name: 'listings',
+                passProps: {
+                    title: 'Sensors',
+                    data: arr
+                }
+            });
+        })
+        .catch((error) => {
+            console.warn(error);
+        });
+    }
+
+    renderLoadingView() {
+        return (
+            <View style={styles.mainWrapper}>
+                <View style={styles.toolbar}>
+                    <Text style={styles.toolbarTitle}>Home</Text>
+                </View>
+                <View style={styles.formWrapper}>
+                    <ActivityIndicator size={"large"}/>
+                </View>
+            </View>
+        );
+    }å
+
   	render() {
+        if (this.state.loading) {
+            return this.renderLoadingView();
+        }
+
 	   	return (
 	      	<View style={styles.mainWrapper}>
 		      	{this.renderNavBar()}
 		      	<View style={styles.formWrapper}>
-		        	<TextInput 
-		        		secureTextEntry={true}
-			      		style={{width: windowWidth, height: 40, borderColor: 'gray', borderWidth: 1, color: 'gray', marginTop: 15,paddingLeft: 15}}
-		        		onChangeText={(text) => this.setState({password: text})}
-	                    placeholder={"Password"}
-		        		value={this.state.password}
-		        	/>
+		        	<TouchableHighlight
+                        onPress={this.getAllUsers.bind(this)}
+                        underlayColor='white'>
+                        <View style={styles.button}>
+                            <Text>Get all users</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        onPress={this.getAllSinks.bind(this)}
+                        underlayColor='white'>
+                        <View style={styles.button}>
+                            <Text>Get all sinks</Text>
+                        </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        onPress={this.getAllSensors.bind(this)}
+                        underlayColor='white'>
+                        <View style={styles.button}>
+                            <Text>Get all sensors</Text>
+                        </View>
+                    </TouchableHighlight>
 		      	</View>
 		    </View>
 		);

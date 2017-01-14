@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Login from './app/Login';
 import Home from './app/Home';
+import Listings from './app/Listings';
 
 export default class rfidReactNative extends Component {
 
@@ -20,13 +21,16 @@ export default class rfidReactNative extends Component {
     renderScene(route, navigator) {
         switch(route.name) {
             case 'login':
-                return <Login navigator={navigator}/>
+                return <Login navigator={navigator} {...route.passProps}/>
                 break;
             case 'home':
-                return <Home navigator={navigator}/>
+                return <Home navigator={navigator} {...route.passProps}/>
+                break;
+            case 'listings':
+                return <Listings navigator={navigator} {...route.passProps}/>
                 break;
             default:
-                return <Login navigator={navigator}/>
+                return <Login navigator={navigator} {...route.passProps}/>
         }
     }
     
@@ -37,7 +41,6 @@ export default class rfidReactNative extends Component {
                 ref={'nav'}
                 style={{flex: 1}}
                 initialRoute={{ name: 'login' }}
-                configureScene={(route) => ({...Navigator.SceneConfigs.HorizontalSwipeJump, gestures: true})}
                 renderScene={ this.renderScene.bind(this) } />
         );
     }
