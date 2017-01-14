@@ -1,0 +1,7 @@
+Projektna zaduženja:
+
+1. Filip Popić  (Apache Spark)
+2. Domagoj Hrestak (Izrada kostura platforme u Spring MVC frameworku, mogu i pomoći sa frontendom)
+3. Zoran Todorović (Mobilne aplikacije za korisnike, web po potrebi)
+4. Luka Jagatic (Platforma Spring MVC)
+5. Hristina Marošević (Front-End)

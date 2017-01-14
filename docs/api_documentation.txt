@@ -1,0 +1,194 @@
+1. Registracija
+
+	1.1 Registracija novog korisnika
+
+	POST 	/rest/register 
+	{
+		"username":string,
+		"password":string
+	}
+
+	Returns:
+	200 : OK			=> User(id:integer, username:string)
+	300 : NOT_PERMITTED	=> USER_ALREADY_EXISTS, USER_PROVIDED_AUTHORIZATION
+
+	# Za sve ostale upite potrebno je u HTTP zahtjev dodati header 
+	# s izračunatim base64 sažetkom {base64 of user:password}
+	# U preostalim zahtjevima će biti izostavljen jer se podrazumijeva
+
+		Content-Type: application/json
+		Authorization: Basic YWRtaW46YWRtaW4=
+
+
+2. Sinkovi (spremišta podataka)
+
+	2.1 Dodavanje novog spremišta podataka
+
+	POST	/rest/sinks
+	{	
+		"userId":integer,
+		"uri":string
+	}
+
+	Returns:
+	200 : OK 			=> Sensor(id:integer, uri:string)
+
+
+	2.2 Dohvaćanje svih spremišta
+
+	GET 	/rest/sinks?userId={userId}
+
+	Returns:
+	200: OK				=> Array[Sink(id:integer, uri:string, userId:integer)]
+
+
+	2.3 Ažuriranje postojećeg spremišta
+
+	PUT		/rest/sinks/{id}
+	{
+		"userId":integer,
+		"uri":string
+	}
+	// ovaj id je @PathVariable {id}
+	// ako ima gdje @RequestParam on izlgeda u url-u ?id={id}
+
+	Returns:
+	200 : OK			=> Sink(id:integer, uri:string, userId:integer)
+	200 : OK			=> null
+	// vraća null ako je id sinka null
+
+3. Korisnici
+
+	3.1 Dohvaćanje svih korisnika
+	
+	GET /rest/users
+
+	Returns:
+	200 : OK			=> Array[User(id:integer, username:string)]
+
+4. Senzori
+
+	4.1 Dodavanje novog senzora
+
+	POST /rest/sensors
+	{
+		"sensor":Sensor,
+		"sinkIds":Iterable
+	}
+
+	Returns:
+	200 : OK			=> Sensor(id:integer, userId:integer, ipAddress:string, sensorType:string)
+	200 : OK			=> null
+	// vraća null ako je sensor null ili sinkIds null
+
+	4.2 Dohvaćanje svih senzora
+
+	GET /rest/sensors
+
+	Returns:
+	200 : OK			=> Array[Sensor(id:integer, userId:integer, ipAddress:string, sensorType:string)]
+
+	4.3 Ažuriranje postojećeg senzora
+
+	PUT /rest/sensors/{id}
+	{
+		"id":integer,
+		"userId":integer,
+		"ipAddress":string,
+		"sensorType":string
+	}
+
+	Returns:
+	200 : OK			=> Sensor(id:integer, userId:integer, ipAddress:string, sensorType:string)
+	200 : OK			=> null
+	// vraća null ako je id null ili ipAddress null ili senzorType null
+
+5. Očitanja (Records)
+
+	5.1 Dodavanje novog očitanja
+
+	POST /rest/records
+	{
+		"sensorIds":[integer]
+	}
+
+	Returns:
+	200 : OK			=> Array[Record(id:integer, dateTime:date, sensorId:integer, chipId:integer)]
+	200 : OK			=> null
+	// vraća null ako je sensorIds null
+
+	5.2 Dohvaćanje očitanja od trenutnog korisnika
+
+	GET /rest/records
+
+	Returns:
+	200 : OK			=> Array[Record(id:integer, dateTime:date, sensorId:integer, chipId:integer)]
+
+	5.3 Brisanje očitanja
+
+	DELETE /rest/records/{id}
+
+	Returns:
+
+	200 : OK
+
+6. Upiti (Queries)
+
+	6.1 Pošalji novi upit
+
+	POST /rest/Queries
+	{
+		"id":integer,
+		"sensorId":integer,
+		"startDateTime":Date,
+		"endDateTime":Date,
+		"count":integer
+	}
+
+	Returns:
+	200 : OK			=> Array[Record(id:integer, dateTime:date, sensorId:integer, chipId:integer)]
+	200 : OK			=> Array[]
+
+	// vraća praznu ArrayListu ako je sensorId ili endDateTime ili startDateTime null
+
+	6.2 Izbriši upit
+
+	DELETE /rest/queries/{id}
+
+	Returns:
+	200 : OK
+
+7. IoT	// TODO Boris
+
+	7.1 Pošalji novo očitanje senzora
+
+	POST /rest/iot/records
+	{
+		"id":integer,
+		"dateTime":Date,
+		"sensorId":integer,
+		"chipId":integer
+	}
+
+	Returns:
+	200 : OK			=> Array[Record(id:integer, dateTime:date, sensorId:integer, chipId:integer)]
+
+	7.2 Pingaj senzor
+
+	POST /rest/iot/ping
+	{
+		// TODO Boris
+	}
+
+	Returns:
+	200 : OK			=> Boolean
+
+	7.3 Promijeni IP adresu senzora
+
+	POST /rest/iot/changeIp
+	{
+		// TODO Boris
+	}
+
+	Returns:
+	200 : OK			=> Boolean
