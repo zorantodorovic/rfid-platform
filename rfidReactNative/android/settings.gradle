@@ -1,0 +1,3 @@
+rootProject.name = 'rfidReactNative'
+
+include ':app'
