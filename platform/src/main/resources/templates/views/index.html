@@ -1,4 +1,4 @@
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>I am text in browser tab</title>
@@ -16,24 +16,8 @@
 
 <body>
 
-<div class="container">
-    <header>
-        <img src="/assets/image/starbucks_logo.png" alt="logo area" class="logo"/>
-        <nav class="top_nav">
-            <ul>
-                <li><a href="/logout">Logout</a></li>
-                <li><a href="/blaa">Blaa</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/sensors/index">Sensors</a></li>
-                <li><a href="/chips">Chips</a></li>
-                <li><a href="/sinks">Sinks</a></li>
-                <li><a href="/queries">Queries</a></li>
-                <li><a href="/records">Records</a></li>
-            </ul>
-        </nav>
-        <div class="clear"></div>
-    </header>
-</div>
+<div th:include="/shared/menu :: menu"></div>
+
 
 <script type="text/javascript">
 
@@ -47,7 +31,7 @@
 
 
 <h1>
-    I am static text in index.html :)
+    I am static text in index.html :) PLATFORMA!!!
 </h1>
 
 </body>

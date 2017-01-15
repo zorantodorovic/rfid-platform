@@ -7,24 +7,7 @@
     <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
 </head>
 <body>
-<div class="container">
-    <header>
-        <img src="/assets/image/starbucks_logo.png" alt="logo area" class="logo"/>
-        <nav class="top_nav">
-            <ul>
-                <li><a href="/logout">Logout</a></li>
-                <li><a href="/blaa">Blaa</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/sensors/index">Sensors</a></li>
-                <li><a href="/chips">Chips</a></li>
-                <li><a href="/sinks">Sinks</a></li>
-                <li><a href="/queries">Queries</a></li>
-                <li><a href="/records">Records</a></li>
-            </ul>
-        </nav>
-        <div class="clear"></div>
-    </header>
-</div>
+<div th:include="/shared/menu :: menu"></div>
 <div >
     <form action="#" th:action="save" method="post">
         <input type="hidden" th:name="id" th:value="${sensor.id}" />
@@ -33,11 +16,11 @@
         <br/>
         <label>Sensor type: </label><input type="text" th:value="${sensor.sensorType}" th:name="sensorType"/>
         <br/>
-        <select th:name="sink">
-            <option th:each="s: ${sinks}"
-                    th:value="${s.id}"
-                    th:text="${s.uri}"></option>
-        </select>
+        <ul>
+            <li th:each="s : ${sinks}">
+                <input type="checkbox" th:value="${s.key.id}" th:text="${s.key.uri}" th:checked="${s.value}" th:name="sinks"/>
+            </li>
+        </ul>
         <br/>
         <input type="submit" value="Save"/>
     </form>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sink</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
+
+    <!-- ne treba verzija jer webjars automatski stavi-->
+    <script type="text/javascript" src='/webjars/jquery/jquery.min.js'></script>
+
+    <script src="/webjarsjs"></script>
+    <script data-main="/js/app" src="/webjars/requirejs/require.min.js"></script>
+</head>
+<body>
+<div th:include="/shared/menu :: menu"></div>
+<form action="#" th:action="add" method="post" th:object="${sink}">
+    <label>Uri: </label><input type="text"  th:field="*{uri}"/>
+    <br/>
+    <input type="submit" value="Add"/>
+</form>
+
+</body>
+</html>
