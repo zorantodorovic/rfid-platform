@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -13,13 +14,13 @@ public class Query {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     private Integer sensorId;
-
-    // Filter attributes (Optional)
 
     private Date startDateTime;
     private Date endDateTime;
-
+    
+    // Optional
     private Integer count;
 
     //region JPA things
@@ -66,7 +67,6 @@ public class Query {
     public void setCount(Integer count) {
         this.count = count;
     }
-
 
 
     //endregion

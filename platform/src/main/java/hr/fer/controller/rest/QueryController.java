@@ -1,4 +1,4 @@
-package hr.fer.controller;
+package hr.fer.controller.rest;
 
 
 import hr.fer.model.Query;
@@ -8,14 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-
-/**
- * kontroleri koji razgovara s vanjskom komponentom
- * npr ako treba spremiti podatak u bazu
- * npr ako treba vidjeti jel korisnikova baza ziva
- */
 @RestController
-@RequestMapping("/queries")
+@RequestMapping("/rest/queries")
 public class QueryController {
 
     private final QueryService queryService;
@@ -25,11 +19,6 @@ public class QueryController {
         this.queryService = queryService;
     }
 
-    @GetMapping
-    public Iterable<Query> readQueries() {
-        return queryService.readQueries();
-    }
-
     @PostMapping
     public Iterable<Record> getFilteredRecords(@RequestBody Query query) {
         return queryService.submitQuery(query);
@@ -37,7 +26,7 @@ public class QueryController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteQuery(@PathVariable Integer id){
-       queryService.deleteQuery(id);
+    public void deleteQuery(@PathVariable Integer id) {
+        queryService.deleteQuery(id);
     }
 }

@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>I am text in browser tab</title>
+
+    <!-- ne treba href="../static/assets/css/index.css" zbog addResourceHandlers  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
+
+    <!-- ne treba verzija jer webjars automatski stavi-->
+    <script type="text/javascript" src='/webjars/jquery/jquery.min.js'></script>
+
+    <script src="/webjarsjs"></script>
+    <script data-main="/js/app" src="/webjars/requirejs/require.min.js"></script>
+</head>
+
+<body>
+
+<div th:include="/shared/menu :: menu"></div>
+
+<h3>List of chips</h3>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Chip ID</th>
+            <th>Chip Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="chips" type="List<hr.fer.model.Chip>"*/-->
+        <!--/*@thymesVar id="chip" type="hr.fer.model.Chip"*/-->
+        <tr th:each="chip : ${chips}">
+            <td th:text="${chip.id}"></td>
+            <td th:text="${chip.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

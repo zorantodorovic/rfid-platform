@@ -1,4 +1,4 @@
-package hr.fer.controller;
+package hr.fer.controller.rest;
 
 
 import hr.fer.model.Sensor;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/sensors")
+@RequestMapping("/rest/sensors")
 public class SensorController {
 
     private final SensorRepository sensorRepository;

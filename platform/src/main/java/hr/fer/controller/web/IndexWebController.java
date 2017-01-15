@@ -14,7 +14,7 @@ public class IndexWebController {
     // "/login"  redirects after success to "/" with POST
     @RequestMapping(method = {GET, POST})
     public String createIndex() {
-        return "index";
+        return "views/index";
     }
 
 

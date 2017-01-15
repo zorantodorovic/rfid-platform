@@ -14,9 +14,20 @@ public class Sink {
     @NotNull
     private String uri;
 
+    @NotNull
+    private Integer userId;
+
     //region JPA things
 
     public Sink() {
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -35,11 +46,15 @@ public class Sink {
         this.uri = uri;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Sink{id=%d, uri='%s'}", id, uri);
-    }
 
     //endregion
 
+    @Override
+    public String toString() {
+        return "Sink{" +
+                "id=" + id +
+                ", uri='" + uri + '\'' +
+                ", userId=" + userId +
+                '}';
+    }
 }

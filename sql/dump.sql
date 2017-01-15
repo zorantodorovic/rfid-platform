@@ -52,9 +52,12 @@ CREATE TABLE `Query` (
   `startDateTime` datetime DEFAULT NULL,
   `endDateTime` datetime DEFAULT NULL,
   `sensorId` int(11) DEFAULT NULL,
+  `count` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Query_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `Query_id_uindex` (`id`),
+  KEY `Query_Sensor_id_fk` (`sensorId`),
+  CONSTRAINT `Query_Sensor_id_fk` FOREIGN KEY (`sensorId`) REFERENCES `Sensor` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +66,7 @@ CREATE TABLE `Query` (
 
 LOCK TABLES `Query` WRITE;
 /*!40000 ALTER TABLE `Query` DISABLE KEYS */;
+INSERT INTO `Query` (`id`, `startDateTime`, `endDateTime`, `sensorId`, `count`) VALUES (1,'2017-01-06 02:49:47','2017-01-06 02:49:52',1,100),(2,'2017-01-06 04:18:43','2017-01-06 04:18:46',3,54);
 /*!40000 ALTER TABLE `Query` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +88,7 @@ CREATE TABLE `Record` (
   KEY `Record_Chip_id_fk` (`chipId`),
   CONSTRAINT `Record_Chip_id_fk` FOREIGN KEY (`chipId`) REFERENCES `Chip` (`id`),
   CONSTRAINT `Record_Sensor_id_fk` FOREIGN KEY (`sensorId`) REFERENCES `Sensor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,8 +168,11 @@ DROP TABLE IF EXISTS `Sink`;
 CREATE TABLE `Sink` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uri` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `userId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Sink_id_uindex` (`id`)
+  UNIQUE KEY `Sink_id_uindex` (`id`),
+  KEY `Sink_User_id_fk` (`userId`),
+  CONSTRAINT `Sink_User_id_fk` FOREIGN KEY (`userId`) REFERENCES `User` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -175,7 +182,7 @@ CREATE TABLE `Sink` (
 
 LOCK TABLES `Sink` WRITE;
 /*!40000 ALTER TABLE `Sink` DISABLE KEYS */;
-INSERT INTO `Sink` (`id`, `uri`) VALUES (1,'iot_platform_records.Record'),(2,'iot_platform_logic.Record');
+INSERT INTO `Sink` (`id`, `uri`, `userId`) VALUES (1,'iot_platform_records.Record',1),(2,'iot_platform_logic.Record',1);
 /*!40000 ALTER TABLE `Sink` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +200,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `User_id_uindex` (`id`),
   UNIQUE KEY `User_username_uindex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +209,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` (`id`, `password`, `username`) VALUES (1,'admin','admin'),(10,'sensor3','sensor3'),(11,'sensor4','sensor4');
+INSERT INTO `User` (`id`, `password`, `username`) VALUES (1,'admin','admin'),(10,'sensor3','sensor3'),(11,'sensor4','sensor4'),(12,'aqq','aqq'),(13,'slon12','slon12');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -215,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-21 19:37:29
+-- Dump completed on 2017-01-06  4:32:01

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SensorSink")
 @IdClass(SensorSinkKey.class)
-public class SensorSink  {
+public class SensorSink {
 
     @Id
     private Integer sensorId;

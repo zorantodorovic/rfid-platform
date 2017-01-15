@@ -1,4 +1,4 @@
-package hr.fer.controller;
+package hr.fer.controller.rest;
 
 
 import hr.fer.model.User;
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/rest/users")
 public class UserController {
 
     private final UserRepository repo;

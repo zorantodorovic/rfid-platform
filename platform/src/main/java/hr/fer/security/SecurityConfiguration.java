@@ -1,4 +1,4 @@
-package hr.fer.config;
+package hr.fer.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/register", "/static/**")
+                .antMatchers("/rest/register", "/web/register", "/static/**")
                 .permitAll()
 
                 .anyRequest()
@@ -42,10 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login") // route endpoint to login controller (in WebConfig)
                 .successForwardUrl("/") // '/login' makes POST to this url
+                .defaultSuccessUrl("/")
                 .permitAll()
-
 
                 .and()
                 .logout()
