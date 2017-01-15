@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sensors</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/index.css"/>
+    <link rel="stylesheet" href="/assets/css/header.css" type="text/css"/>
+
+    <!-- ne treba verzija jer webjars automatski stavi-->
+    <script type="text/javascript" src='/webjars/jquery/jquery.min.js'></script>
+
+    <script src="/webjarsjs"></script>
+    <script data-main="/js/app" src="/webjars/requirejs/require.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+        <header>
+            <img src="/assets/image/starbucks_logo.png" alt="logo area" class="logo"/>
+            <nav class="top_nav">
+                <ul>
+                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/blaa">Blaa</a></li>
+                    <li><a href="/users">Users</a></li>
+                    <li><a href="/sensors/index">Sensors</a></li>
+                    <li><a href="/chips">Chips</a></li>
+                    <li><a href="/sinks">Sinks</a></li>
+                    <li><a href="/queries">Queries</a></li>
+                    <li><a href="/records">Records</a></li>
+                </ul>
+            </nav>
+            <div class="clear"></div>
+        </header>
+    </div>
+    <table border="2" width="70%" cellpadding="2">
+        <tr><th>Id</th><th>Ip address</th><th>Type</th><th></th><th></th></tr>
+
+            <tr th:each="item : ${sensors}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.ipAddress}"></td>
+                <td th:text="${item.sensorType}"></td>
+                <!--td>
+                    <form action="#" th:action="${sensors/edit}" th:object="${sensor}" method="post">
+                        <input type="hidden" th:value="${item.id}" th:field="*{id}"/>
+                        <input type="submit" value="Edit"/>
+                    </form>
+                </td>
+                <td><a href="edit" th:onclick="'javascript:function(){' + ${sensor} + '=' + $item + ';return true;})'">Edit</a></td-->
+                <td><a th:href="${'edit/' + item.id}">Edit</a></td>
+                <td><a th:href="${'delete/' + item.id}">Delete</a></td>
+            </tr>
+    </table>
+    <br/>
+    <a href="add">Add Sensor</a>
+</body>
+</html>
