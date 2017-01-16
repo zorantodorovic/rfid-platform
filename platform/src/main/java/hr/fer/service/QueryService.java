@@ -27,6 +27,8 @@ public class QueryService {
         return queryRepository.findBySensorIdIn(sensorIds);
     }
 
+    public List<Query> readAllQueries() { return queryRepository.findAll(); }
+
     public List<Record> submitQuery(Query query) {
         if (query.getSensorId() != null && query.getEndDateTime() != null && query.getStartDateTime() != null) {
             queryRepository.save(query);

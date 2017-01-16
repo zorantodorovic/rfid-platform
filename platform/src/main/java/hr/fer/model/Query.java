@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -48,16 +50,20 @@ public class Query {
         return startDateTime;
     }
 
-    public void setStartDateTime(Date startDateTime) {
-        this.startDateTime = startDateTime;
+    public void setStartDateTime(String startDateTime) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        Date parsed = format.parse(startDateTime);
+        this.startDateTime = parsed;
     }
 
     public Date getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(Date endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setEndDateTime(String endDateTime) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        Date parsed = format.parse(endDateTime);
+        this.endDateTime = parsed;
     }
 
     public Integer getCount() {
