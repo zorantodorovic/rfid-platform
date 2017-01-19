@@ -10,6 +10,7 @@ import {
 import Login from './app/Login';
 import Home from './app/Home';
 import Listings from './app/Listings';
+import RecordsListings from './app/RecordsListings';
 
 export default class rfidReactNative extends Component {
 
@@ -28,6 +29,9 @@ export default class rfidReactNative extends Component {
                 break;
             case 'listings':
                 return <Listings navigator={navigator} {...route.passProps}/>
+                break;
+            case 'records':
+                return <RecordsListings navigator={navigator} {...route.passProps}/>
                 break;
             default:
                 return <Login navigator={navigator} {...route.passProps}/>

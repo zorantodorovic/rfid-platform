@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import Dimensions from 'Dimensions';
 
 var windowWidth = Dimensions.get('window').width;
-var serverIpAddress = "192.168.0.19";
+// var serverIpAddress = "192.168.0.19";
+var serverIpAddress = "172.20.10.5";
+var btoa = require('Base64').btoa;
 
 import {
     StyleSheet,
@@ -49,13 +51,14 @@ class Login extends Component {
 
     toBase64() {
         var string = "admin:admin";
+        // var string = `${this.state.username}:${this.state.password}`;
         var bs64 = btoa(string);
         return bs64;
     }
 
     login() {
         var basicToken = this.toBase64();
-        console.log(basicToken);
+        // console.log(basicToken);
         this.setState({ loading: true });
         setTimeout(() => {
             this.props.navigator.push({

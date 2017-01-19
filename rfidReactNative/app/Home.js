@@ -33,6 +33,36 @@ class Home extends Component {
     componentDidMount() {
     }
 
+    getAllRecords() {
+        var arr = [];
+        this.setState({ loading: true });
+        fetch(`http://${this.props.ipAddress}:8080/rest/records`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${this.props.basicToken}`,
+          }
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+            responseData.forEach( function(element, index) {
+                arr.push(element.dateTime);
+            });
+            this.setState({ loading: false });
+            this.props.navigator.push({
+                name: 'records',
+                passProps: {
+                    title: 'Records',
+                    data: responseData
+                }
+            });
+        })
+        .catch((error) => {
+            console.warn(error);
+        });
+    }
+
     getAllUsers() {
         var arr = [];
         this.setState({ loading: true });
@@ -118,7 +148,6 @@ class Home extends Component {
                 arr.push(element.ipAddress);
             });
             this.setState({ loading: false });
-            console.log(responseJson);
             this.props.navigator.push({
                 name: 'listings',
                 passProps: {
@@ -143,7 +172,7 @@ class Home extends Component {
                 </View>
             </View>
         );
-    }å
+    }
 
   	render() {
         if (this.state.loading) {
@@ -155,10 +184,10 @@ class Home extends Component {
 		      	{this.renderNavBar()}
 		      	<View style={styles.formWrapper}>
 		        	<TouchableHighlight
-                        onPress={this.getAllUsers.bind(this)}
+                        onPress={this.getAllRecords.bind(this)}
                         underlayColor='white'>
                         <View style={styles.button}>
-                            <Text>Get all users</Text>
+                            <Text>Get all records</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight
