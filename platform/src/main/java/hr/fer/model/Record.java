@@ -22,6 +22,11 @@ public class Record {
 
     public Record() {
     }
+    public Record(Date dateTime, int sensorId, int chipId) {
+        this.dateTime = dateTime;
+        this.sensorId = sensorId;
+        this.chipId = chipId;
+    }
 
     public Integer getId() {
         return id;

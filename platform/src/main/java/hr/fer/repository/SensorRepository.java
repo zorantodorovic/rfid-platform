@@ -11,5 +11,6 @@ import java.util.List;
 public interface SensorRepository extends CrudRepository<Sensor, Integer> {
 
     List<Sensor> findByUserId(Integer userId);
+    Sensor findBySensorId(String sensorId);
 
 }

@@ -12,6 +12,8 @@ public class Chip {
 
     private String name;
 
+    private String uid;
+
     // region JPA things
 
     public Chip() {
@@ -33,9 +35,17 @@ public class Chip {
         this.name = name;
     }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
     @Override
     public String toString() {
-        return String.format("Chip{id=%d, name='%s'}", id, name);
+        return String.format("Chip{id=%d, name='%s', uid='%s'}", id, name, uid);
     }
 
     //endregion

@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChipRepository extends CrudRepository<Chip, Integer> {}
+public interface ChipRepository extends CrudRepository<Chip, Integer> {
+    Chip findByUid(String uid);
+}

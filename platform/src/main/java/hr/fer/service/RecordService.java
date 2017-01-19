@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.collect;
 
 @Service
 public class RecordService {
@@ -76,7 +80,9 @@ public class RecordService {
     }
 
     public Iterable<Record> readRecordsFromUser(Integer userId) {
-        List<Sink> sensors = sinkRepository.findByUserId(userId);
-        return recordRepository.findBySensorIdIn(sensors);
+        List<Integer> sensorIds = sinkRepository.findByUserId(userId)
+                .stream().map(Sink::getId).collect(Collectors.toList());
+
+        return recordRepository.findBySensorIdIn(sensorIds);
     }
 }

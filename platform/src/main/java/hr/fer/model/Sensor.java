@@ -20,9 +20,20 @@ public class Sensor {
     @NotNull
     private String sensorType;
 
+    private String sensorId;
+
+
     //region JPA things
 
     public Sensor() {
+    }
+
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId;
+    }
+
+    public String getSensorId() {
+        return sensorId;
     }
 
     public Integer getId() {
