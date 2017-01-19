@@ -1,23 +1,20 @@
 package hr.fer.controller.rest;
 
-import hr.fer.model.Chip;
 import hr.fer.model.Record;
+import hr.fer.model.Sensor;
 import hr.fer.repository.ChipRepository;
 import hr.fer.repository.SensorRepository;
 import hr.fer.service.IoTService;
 import hr.fer.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static org.springframework.http.HttpHeaders.USER_AGENT;
 
 
 /**
@@ -51,13 +48,14 @@ public class IoTController {
         return recordService.saveRecord(rec);
     }
 
-    @PostMapping("/ping")
-    public Boolean pingSensor() throws IOException {
-        return ioTService.pingSensor();
+    @GetMapping("/ping")
+    public Boolean pingSensor(Integer id) throws IOException {
+        Sensor sens = sensorRepository.findById(id);
+        return ioTService.pingSensor(sens.getIpAddress());
     }
 
-    @PostMapping("/changeIp")
-    public Boolean changeIpAdress() throws IOException {
+    @GetMapping("/changeIp")
+    public Boolean changeIpAdress(Integer id) throws IOException {
         return ioTService.changeSensorIpAdress();
     }
 

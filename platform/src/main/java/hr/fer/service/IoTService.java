@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 
 @Service
@@ -22,8 +21,8 @@ public class IoTService {
         this.sensorRepository = sensorRepository;
     }
 
-    public Boolean pingSensor() throws IOException {
-        URL obj = new URL(ip + "/RFID/rest/url");
+    public Boolean pingSensor(String url) throws IOException {
+        URL obj = new URL("http://" + url + "/RFID/rest/url");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         con.setRequestMethod("GET");

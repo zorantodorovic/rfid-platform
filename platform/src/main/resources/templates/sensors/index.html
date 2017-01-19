@@ -27,6 +27,8 @@
                             <li th:text="${sink.uri}"></li>
                         </ul>
                 </td>
+                <td><a href="#" class="ping" th:id="${item.key.id}">Ping</a></td>
+                <td><a href="#" class="calibrate" th:id="${item.key.id}">Calibrate</a></td>
                 <td><a th:href="${'edit/' + item.key.id}">Edit</a></td>
                 <td><a th:href="${'delete/' + item.key.id}">Delete</a></td>
             </tr>
@@ -34,4 +36,30 @@
     <br/>
     <a href="add">Add Sensor</a>
 </body>
+<script>
+    var getUrl = window.location;
+    var baseUrl = getUrl .protocol + "//" + getUrl.host + "/";
+    $(".ping").click(function(e){
+        var id = e.target.id;
+        $.get(baseUrl+ "/rest/iot/ping?id=" + id, function(data, status){
+            if(data) {
+                window.alert("PING! ALIVE!");
+            } else {
+                window.alert("DEAD!");
+            }
+        });
+    });
+
+    $(".calibrate").click(function(e){
+        var id = e.target.id;
+        $.get(baseUrl+ "/rest/iot/changeIp?id=" + id, function(data, status){
+            if(data) {
+                window.alert("Success!");
+            } else {
+                window.alert("Failure!");
+            }
+        });
+    });
+
+</script>
 </html>
